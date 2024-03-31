@@ -1,0 +1,192 @@
+while True:
+
+    print("\nHello. Let's tell a story. I will ask 5 questions, just type your answer and tap enter to go to the next one.")
+    input("\n Press enter to continue...")
+    print ()
+
+    userName = input("What is your cat name?  ")
+    while(len(userName) == 0):
+        userName = input("Please enter cat name:  ")
+    humanName = input("What is your human's name?  ")
+    while(len(humanName) == 0):
+        humanName = input("Please enter human's name:  ")
+    breedType = input("What breed or type of cat are you?  ")
+    while(len(breedType) == 0):
+        breedType = input("Please enter cat breed:  ")
+    favToy = input("What is your favorite cat toy?  ")
+    while(len(favToy) == 0):
+        favToy = input("Please enter your favorite toy:  ")
+    favSpot = input("What is your favorite place to sleep?  ")
+    while(len(favSpot) == 0):
+        favSpot = input("Please enter favorite sleeping spot:  ")
+
+    print("\nLet's start. When coming to a decision prompt, type in the capitalized words.")
+    input("\nPress enter to continue...")
+
+
+    #SLEEP1 (BACK_ASLEEP)
+    sleep1 = "\n----------\nHaving thought about all your options, you decide that more sleep sounds perfect. Everyone knows "+breedType+" cats love their naps."\
+    "\nYou saunter over to your favorite "+favSpot+" and plop down."\
+    "\nAfter a few hours you wake up again. Hunger has hit."\
+    "\nAs you walk over to your food bowl, you stretch out your front legs then your back legs."\
+    "\nTummy full. Time for your next activity."
+
+    #BATHE
+    bathe = "\n----------\nHaving thought about all your options, you decide it's time for a good cleaning. "+ humanName+" likes to watch sometimes and"\
+    "\nit distracts you so doing it while they are gone is best. After a while of cleaning, fur soft as ever, time for some food"\
+    "\nand water. Gotta clean the tongue that cleaned you. Fresh tuna. Yum!"
+    "\nWhat's next?"
+
+    #SLEEP2 (SLEEP)
+    sleep2 = "\n----------\nSince you ate so much, you decide to just go to sleep. Don't wanna hack up a hairball by being too active"\
+    "\nafter stuffing your face. A couple of hours should do. You go back to the "+favSpot+", give a big noisy yawn, and stretch out."\
+    "\nYou wake up a few hours later to a loud noise. After searching the house, you hear a car horn outside"\
+    "\nand figure that is probably what you heard before."
+
+    #PLAY1 (PLAY)
+    play1 = "\n----------\nPlaytime!"\
+    "\nYour favorite toy "+favToy+" is just across the room. Practically taunting you."\
+    "\nYou crouch down, wait patiently for it to go back to what it was doing."\
+    "\nYou wiggle your butt to get the right trajectory and pounce! The toy "+favToy+" never saw you coming."\
+    "\nYou throw it across the room and chase after it, knocking a book off the coffee table."\
+    "\nAfter what felt like eternity, the toy "+favToy+" is dead."\
+    "\nTime for some well-deserved water. You ponder what you want to do next."\
+
+    #SLEEP3 (NAP)
+    sleep3 = "\n----------\nMaybe more sleep. You deserve it after all."\
+    "\nYou head over to your favorite "+favSpot+" with a big yawn."\
+    "\nAfter kneading the spot for a minute, you curl up into a tight ball. "\
+    "\n'I wonder if I’ll get more scritchies when "+humanName+" comes home? Maybe even a bit of brushing.'"\
+
+
+    #PLAY2 (TOY)
+    play2 = "\n----------\nIt's "+favToy+" time! You think for a second where you may have left it. Under the armchair. You sneak around it,"\
+    "\nlike a wild cat circling a bush that's hiding its prey. You pounce, front claws diving in and grabbing the "+favToy+"."\
+    "\nYou fling it across the room and jump across the coffee table, scattering some loose papers. It's a crazy chase."\
+    "\nYou eventually catch it and munch for a minute before picking it up in your mouth and hiding it under the couch."\
+    "\nYou walk away but turn around quickly as if it just caught your attention. Butt wiggle, aim, charge! Half your body"\
+    "\nis under the couch, reaching, stretching, trying to get the "+favToy+" even though it is well within range."
+
+
+    #LAZY (sleep1 + sleep2 + sleep3)
+    lazy = "\n----------\nYou wake up to the door opening again. "+humanName+" is back home. After dropping off their stuff,"\
+    "\nthey come over and give you soft pets. You purr. They smile."\
+    "\nYou had a nice lazy day. What will tomorrow bring?"
+
+
+    #ACTIVE(__ + play1 + play2)
+    active = "\n----------\nYou toss your toy in the air and it lands on the side table, right next to the lamp. Got to be careful. Got to be sneaky."\
+    "\nA giant leap and the "+favToy+" is done for. But so is everything on the table. It hits the floor in a pile. Oops."\
+    "\nNot long after, "+humanName+" comes home to see your mess."\
+    "\nWith a sigh, they clean everything up and grumble that you are lucky you're so cute."\
+    "\n'I'm not lucky.' You think to yourself. 'As a cat, it is the only possibility.'"\
+    "\nYou had a wild, playful, active day. What will tomorrow bring?"
+
+
+    #AVERAGE (everything else)
+    average = "\n----------\nAfter some time, "+humanName+" comes home. You rush over and meow excitedly."\
+    "\nThey reach down and curl a finger under your chin."\
+    '\n“Hi, '+userName+'! I missed you. Looks like you missed me, too.”'\
+    "\nYou end your alone time having done typical cat things. It was a good day. What will tomorrow bring?"
+
+
+    #SECRET (bathe + sleep2 + play2)
+    secret = "\n----------\nAfter a while of playing, you stop for a drink. You hear the lock click over. "+humanName+" is home."\
+    "\nYou run over to your toy, pick it up and wait for them to be done dropping off their stuff."\
+    "\nYou then present to them your kill and pose, waiting for praise. They pick you up and snuggle"\
+    "\nyou close, calling you adorable. You of course enjoy this but can't show that. You jump down with a meow,"\
+    "\ndeclaring that you are a fierce warrior and not adorable. They laugh."\
+    "\nGrooming, sleeping, playing. A fulfilling day. What will tomorrow bring?"\
+    "\n(Secret ending)"
+
+
+    #INTRO
+    intro = "\n----------\nYou wake up to the sounds of "+humanName+" getting ready to leave for the day."\
+    "\nYou stretch out your legs with a big yawn and stand up."\
+    '\n“Hi '+userName+', my sweet baby.” '+humanName+' says. “A couple of scritchies before I go?”'\
+    "\nYou trot over and meow a few times in agreement. After a couple minutes, the door closes and locks. You are on your own."\
+    "\nThe house is yours."
+
+
+
+
+    while True:
+
+        print(intro)
+
+
+
+        choice1 = input("\nWhat to do first: BATHE or go BACK ASLEEP?  ")
+        while True:
+            if choice1.lower() == "bathe":
+                print(bathe)
+                break
+            elif choice1.lower() == "back asleep":
+                print(sleep1)
+                break
+            else:
+                print("Error. Valid responceses are capitalized in prompt. Please try again.")
+                choice1 = input("\nWhat to do first: BATHE or go BACK ASLEEP?  ")
+                continue
+                   
+        
+
+        choice2 = input("\nDo you PLAY for a while or SLEEP?  ")
+        while True:
+            if choice2.lower() == "play":
+               print(play1)
+               break
+            elif choice2.lower() == "sleep":
+               print(sleep2)        
+               break
+            else:
+                print("Error. Valid responceses are capitalized in prompt. Please try again.")
+                choice2 = input("\nDo you PLAY for a while or SLEEP?  ")
+                continue
+           
+
+
+        choice3 = input("\nDo you NAP or play with a TOY for a bit?  ")
+        while True:
+
+            if choice3.lower() == "nap":
+                print(sleep3)
+                break
+            elif choice3.lower() == "toy":
+                print(play2)
+                break
+            else:
+                print("Error. Valid responceses are capitalized in prompt. Please try again.")
+                choice3 = input("\nDo you NAP or play with a TOY for a bit?  ")
+                continue
+            
+        
+
+        input("Press enter to continue...  ")
+
+
+
+        if choice1 == "back asleep" and choice2 == "sleep" and choice3 == "nap":
+           print(lazy)
+        elif choice2 == "play" and choice3 == "toy":
+          print(active)
+        elif choice1 == "bathe" and choice2 == "sleep" and choice3 == "toy":
+          print(secret)
+        else:
+         print(average)
+
+
+
+        choice4 = input("\nGo to tomorrow? YES or NO:  ")
+
+        if choice4.lower() == "yes":
+            continue
+        else:
+            break
+
+    choice5 = input("\nSTART OVER or EXIT?  ")
+
+    if choice5.lower() == "start over":
+        continue
+    else:
+        break
