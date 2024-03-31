@@ -1,0 +1,95 @@
+from datetime import datetime
+from datetime import date
+import math
+from calendar import monthrange 
+
+print ("Welcome to Hotel Panda!")
+input("Press enter to continue...  ")
+
+
+format = "%Y/%m/%d"
+
+
+today = str(date.today())
+today = today.split('-')
+today = '/'.join(today)
+#print (today)
+
+def num_days(start_date, end_date):
+    return (end_date-start_date).days
+
+while True:
+    print("----------")
+
+    res_start = input("\nArrival date (YYYY/MM/DD):  ")
+    while True:
+        try:
+            res = bool(datetime.strptime(res_start, format))
+            break
+        except ValueError:
+            res = False
+            print("\nIncorrect format. Please try again.")
+            res_start = input("Arrival date (YYYY/MM/DD):  ")
+    while True:
+        if res_start < today:
+            print("\nError. Arrival date must be today or later. Please try again.")
+            res_start = input("Arrival date (YYYY/MM/DD):  ")
+        else:
+            break
+    start_date = datetime.strptime(res_start, format)
+
+
+
+    res_end = input("\nDeparture date (YYYY/MM/DD):  ")
+    while True:
+        try:
+            res = bool(datetime.strptime(res_end, format))
+            break
+        except ValueError:
+            res = False
+            print("\nIncorrect format. Please try again.")
+            res_end = input("Departure date (YYYY/MM/DD):  ")
+    while True:
+        if res_end <= res_start:
+            print("\nError. Departure date must be after arrival date. Please try again.")
+            res_end = input("Departure date (YYYY/MM/DD):  ")
+        else:
+            break
+    end_date = datetime.strptime(res_end, format)
+
+
+
+    num_days = end_date - start_date
+
+    rate_month = res_start.split('/')
+
+    aug_rate = int("105")
+    reg_rate = int("85")
+
+    rate =  " " 
+    if rate_month[1] == "8" or rate_month[1] == "08":
+        rate = aug_rate
+    else:
+        rate = reg_rate
+
+
+
+
+    total_price = int(num_days.days) * rate
+
+    print("\n----------")
+    print("\nArrival date:        ", (start_date.strftime("%B %d, %Y")))
+    print("Departure date:      ", (end_date.strftime("%B %d, %Y")))
+    print("Number of nights:    ", num_days.days)
+    print("Nightly rate:         $"+ str(rate))
+    print("Total:                $"+ str(total_price))
+
+    next_res = input("\nMake another reservation? (Y/N):  ")
+    if next_res.lower() == "y":
+        print(" ")
+        continue
+    elif next_res.lower() == "n":
+        print("\nThank you. Enjoy your visit. \nPlease think of us next time you need a place to stay!")
+        break
+    else:
+        break
