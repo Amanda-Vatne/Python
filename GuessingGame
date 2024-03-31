@@ -1,0 +1,42 @@
+import random
+
+def intro():
+    print("Guess the number!\n")
+    
+def numGen():
+    secret_num = random.randint(1, limit_num)
+    return secret_num
+    
+gameIntro = intro()
+
+
+
+play_again = " "
+while play_again.lower() != "n":
+    
+    limit_num =input("The limit will be between 1 and:  ")
+    while not limit_num.isdigit():
+        limit_num = input("\nValue not recognized. Please enter a numeric value:  ")
+    limit_num = int(limit_num)
+
+    num_guess = 1
+    secretNum = numGen()
+    user_guess = int(input("\nWhat is your guess?  "))
+    while user_guess != secretNum:
+        if user_guess > secretNum and user_guess <= limit_num:
+            print("--Too high. Try agian--")
+        elif user_guess < secretNum and user_guess > 0:
+            print("--Too low. Try again--")
+        else:
+            print("Not within the limit. Try again.")
+        user_guess = int(input("What is your guess?  "))
+        num_guess = num_guess + 1
+        continue
+    if user_guess == secretNum:
+        print("Correct! The number was" , secretNum)
+        print("It took", num_guess, "tries.")
+
+
+    play_again = input("\nWould you like to play agian? (Y/N)  ")
+    if play_again.lower() == "n":
+        print("\nThank you for playing!")
