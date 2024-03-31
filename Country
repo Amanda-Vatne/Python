@@ -1,0 +1,60 @@
+def menuCommands():
+    print("Countries List Program\n")
+    print("Commands List")
+    print("view - View country name")
+    print("add  - Add a country")
+    print("del  - Delete a country")
+    print("exit - Exit program\n")
+    
+def listCountries(**countrieslist):
+    countrieslist = {"CA": "Canada", "MX": "Mexico", "US": "United States"}
+    return countrieslist
+countriesList = listCountries()
+
+def viewCommand():
+    print("Country Codes:" , end = " ")
+    i = 0
+    while i < len(countriesList):   
+        keysList = list(countriesList.keys())
+        print(keysList[i], end = " ")
+        i = i +1
+    userCode = input("\nEnter Country Code: ")
+    while  userCode  not in countriesList:
+        userCode = input("\nEnter valid Country Code: ")
+    print(countriesList.get(userCode))
+    print()
+    return countriesList
+
+def addCommand():
+    newCode = input("Enter country code: ")
+    while newCode in countriesList:
+        print(countriesList.get(newCode) ," already uses this code.")
+        newCode = input("Enter country code: ")
+    newCountry = input("Enter country name: ")
+    countriesList[newCode] = newCountry
+    print(newCountry, " was added!\n")
+    
+def delCommand():
+    delCountry = input("Enter country code: ")
+    while delCountry not in countriesList:
+        print(delCountry, " does not exist.")
+        delCountry = input("Enter country code: ")
+    print(countriesList.get(delCountry), "was deleted!\n")
+    del  countriesList[delCountry]
+   
+
+
+menuCommands()
+while True:
+    userChoice = input("\nCommand:  ")
+    if userChoice.lower() == "view":
+        viewCommand()
+    elif userChoice.lower() == "add":
+        addCommand()
+    elif userChoice.lower() == "del":
+        delCommand()
+    elif userChoice.lower() == "exit":
+        print("Goodbye")
+        break
+    else:
+        print("Not a valid command. Please try again: ")
