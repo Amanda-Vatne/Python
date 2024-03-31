@@ -1,0 +1,65 @@
+def menuCommands():
+    print("The Movies List Program\n")
+    print("Commands List")
+    print("list - List all movies")
+    print("add  - Add a movie")
+    print("del  - Delete a movie")
+    print("exit - Exit program\n")
+    
+def moviesFile():
+    initialList = ["Monty Python and the Holy Grail\n", "On the Water Front\n", "Cat on a Hot Tin Roof\n"]
+    file = open("movies.txt", "w")
+    file.writelines(initialList)
+
+openFile = moviesFile()
+
+def listMovies():
+    with open("movies.txt", "r") as file:
+        moviesList = []
+        for x in file:
+            lineRead = x.strip()
+            moviesList.append(lineRead)
+    return moviesList
+
+moviesList = listMovies()
+
+def listCommand():
+    i = 0
+    while i < len(moviesList):   
+        print(i+1, moviesList[i])
+        i = i +1
+    return moviesList
+
+
+def addCommand():
+    newMovie = input("Name: ")
+    moviesList.append(newMovie)
+    print(newMovie, " was added!\n")
+    listCommand()
+    
+def delCommand():
+    delMovie = input("Number: ")
+    numMovies = len(moviesList)
+    while delMovie.isdigit() == False or numMovies < int(delMovie):
+        delMovie = input(f"Invalid choice. Choose 1-{numMovies}:  ")
+    delMovie = int(delMovie)
+    deleted = moviesList[delMovie - 1]
+    print(deleted, "was deleted!\n")
+    moviesList.pop(delMovie -1)
+    listCommand()
+
+
+menuCommands()
+while True:
+    userChoice = input("\nCommand:  ")
+    if userChoice.lower() == "list":
+        listCommand()
+    elif userChoice.lower() == "add":
+        addCommand()
+    elif userChoice.lower() == "del":
+        delCommand()
+    elif userChoice.lower() == "exit":
+        print("Goodbye")
+        break
+    else:
+        print("Not a valid command. Please try again: ")
