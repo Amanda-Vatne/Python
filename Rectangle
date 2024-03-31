@@ -1,0 +1,41 @@
+from dataclasses import dataclass
+@dataclass
+
+class Rectangle:
+    width: int
+    height: int
+    def get_perimeter(self):
+        perimeter = self.height * 2 + self.width * 2
+        return perimeter
+    def get_area(self):
+        area = self.height * self.width
+        return area
+    def print_rect(self):
+        rect = ""
+        star = "* "
+        center = "  "
+        rect += star * self.width + "\n"
+        for i in range(self.height - 2):
+            line = star + center * (self.width - 2) + star + "\n"
+            rect += line
+        rect += star * self.width
+        return rect
+
+def main():
+    print("Rectangle Calculator")
+    again = " "
+    while again.lower() != "n":
+        print()
+        height = int(input("Height: "))
+        width = int(input("Width: "))
+        
+        rectangle = Rectangle(width, height)
+        print("Perimeter:", rectangle.get_perimeter())
+        print("Area:", rectangle.get_area())
+        print()
+        print(rectangle.print_rect())
+        
+        again = input("\nAnother?(Y/N)")
+        
+if __name__ == "__main__":
+    main()
