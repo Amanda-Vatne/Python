@@ -1,0 +1,39 @@
+print("Invoice Line Item Calculator")
+next = ("y")
+
+def isfloat(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
+def isint(num):
+    try:
+        int(num)
+        return True
+    except ValueError:
+        return False
+
+while next.lower() == "y":
+
+    item_price = input("\nEnter price:  ")
+    while isfloat(item_price) is False:
+        print("Invalid decimal number. Please try again")
+        item_price = input("Enter price:  ")
+
+    item_quantity = input("Enter quantity:  ")
+    while isint(item_quantity) is False:
+        print("Invalid integer number. Please try again")
+        item_quantity = input("Enter quantity:  ")
+    
+    price = float(item_price)
+    quantity = int(item_quantity)
+
+    total = price * quantity
+
+    print("\nPRICE:   ", price, "\nQUANTITY:", quantity, "\nTOTAL:   ", total)
+
+    next = input("\nAdd another line item? (Y/N):  ")
+    if next.lower() == "n":
+        print("\nBye!")
+        break
