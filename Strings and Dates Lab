@@ -1,0 +1,39 @@
+import datetime
+from datetime import datetime
+from datetime import date
+import math
+from calendar import monthrange
+
+format = "%B %d, %Y"
+
+user_date = " "
+
+
+while user_date != "-1":
+    user_date = input ("Enter date (Example - March 3, 2022):  ")
+    if user_date == "-1":
+        break
+
+    while True:
+        try:
+            res = bool(datetime.strptime(user_date, format))
+            break
+        except ValueError:
+            res = False
+            print("Incorrect format. Please try again.")
+            user_date = input ("Enter date (Example - March 3, 2022):  ")
+
+
+    date_split = user_date.split(' ')
+
+    month_name = date_split[0]
+    
+    month_num = str(datetime.strptime(month_name, '%B').month)
+
+    day = date_split[1][0:-1]
+
+    year = date_split[2]
+
+    new_date = (month_num, day, year)
+    
+    print('/'.join(new_date))
