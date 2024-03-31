@@ -1,0 +1,40 @@
+import random
+import time
+random.seed(time.time())
+
+class Card():
+    rank = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+    suit = ["Hearts", "Diamonds", "Clubs", "Spades"]
+    
+class Deck():
+    deck = []
+    
+    def shuffle(hand):
+        while hand != 0:
+            k = 0
+            cardRank = random.choice(Card.rank)
+            cardSuit = random.choice(Card.suit)
+            cardChosen = cardRank + " of " + cardSuit
+            if cardChosen in Deck.deck:
+                continue
+            else:
+                Deck.deck.append(cardChosen)
+                hand -= 1
+    def deal():
+        i = 0
+        print("Here is your hand:")
+        while i < len(Deck.deck):   
+            print(Deck.deck[i])
+            i = i +1
+
+    def count(hand):
+        cardsLeft = 52 - hand
+        print(f"There are {cardsLeft} cards left in the deck.")
+
+print("-Card Dealer- \n \nI have shuffled a deck of 52 cards")
+hand = int(input("How many cards would you like? "))
+Deck.shuffle(hand)
+print()
+Deck.deal()
+print()
+Deck.count(hand)
