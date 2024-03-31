@@ -1,0 +1,163 @@
+class Login:
+    def __init__(self, userID, userPW, userRole):
+        self.userID = userID
+        self.userPW = userPW
+        self.userRole = userRole
+
+def read_user_file():
+    file = open("userLoginInfo.txt", "r")
+    userList = []
+    for x in file:
+        userInfo = [x.strip() for x in x.strip().split("|")]
+        userList.append([userInfo[0], userInfo[1], userInfo[2]])
+    return userList
+
+def display_user_info(endingList):
+    for x in endingList:
+        print(f"User name: {x[0]} - User Password: {x[1]} - User Role: {x[2]}")
+
+def get_new_users (userList):
+    userID = " "
+    allNewUsers = []
+    while userID.lower() != "end":    
+        userID = input("New user's ID: ")
+        if userID.lower() == "end":
+            break
+        for sublist in userList:
+            while sublist[0] == userID:
+                userID = input("User already exists. Enter new ID: ")
+        userPW = input("New user's password: ")
+        userRole = input("New user's role (Admin or User): ")
+        while userRole.lower() != "admin" and userRole.lower() != "user":
+                userRole = input("Invalid user role. Please enter 'Admin' or 'User': ")
+        newUser = [userID, userPW, userRole]
+        allNewUsers.append(newUser)
+        addToClass = Login(userID, userPW, userRole)
+    return allNewUsers
+     
+def user_save_file(usersToAdd):
+    file = open("userLoginInfo.txt", "a+")
+    for x in usersToAdd:
+        file.write('{}|{}|{}\n'.format(x[0], x[1], x[2]))
+        
+def system_login(endingList):
+    userRole = "None"
+    userID = input("Enter username: ")
+    userPW = input("Enter password: ")
+    for sublist in endingList:
+        if sublist[0] == userID and sublist[1] == userPW:
+            userRole = sublist[2]
+    
+    return userRole
+    
+def get_name():
+    empName = input("Enter employee name (Type END for totals): ")
+    return empName
+
+def get_worked_dates():
+    fromDate = input("Worked from (MM/DD/YYYY):  ")
+    toDate = input("Worked to (MM/DD/YYYY):  ")
+    return fromDate, toDate
+
+def get_hours_worked():
+    empHours = float(input("Enter total hours worked: "))
+    return empHours
+
+def get_hourly_rate():
+    empPay = float(input("Enter hourly rate: "))
+    return empPay
+
+def get_tax_rate():
+    taxRate = float(input("Enter tax percent: %"))
+    return taxRate
+
+def emp_save_file(empDetails):
+    file = open("employeeSaveFile.txt", "a+")
+    file.write('{}|{}|{}|{}|{}|{}\n'.format(empDetails[0], empDetails[1], empDetails[2], empDetails[3], empDetails[4], empDetails[5]))    #0 from date - 1 to date - 2 emp name - 3 hours - 4 hourly rate - 5 tax rate
+
+def display_all_info():
+    EmpDetailList = []
+    validation = False
+    fileDate = " "
+    while not validation:
+        fileDate = input("Enter date you want records for (MM/DD/YYYY):")
+        if (len(fileDate.split('/')) != 3 and fileDate.lower() != 'all'):
+            print("Invalid Date Format: ")
+        else:
+            validation = True
+     
+    totalEmps = 0
+    totalHours = 0
+    totalTaxesPaid = 0
+    totalNet = 0
+    file = open("employeeSaveFile.txt", "r")
+    for x in file:
+        empList = [x.strip() for x in x.strip().split("|")]
+        if fileDate.lower() == "all":
+            EmpDetailList.append([empList[0], empList[1], empList[2], float(empList[3]), float(empList[4]), float(empList[5])])
+            empGross = float(empList[3]) * float(empList[4])
+            taxPaid = empGross * (float(empList[5]) / 100)
+            empNet = empGross - taxPaid
+            print(f"{empList[0]} - {empList[1]} - {empList[2]} - {empList[3]} - {empList[4]} - {empGross:.2f} - {empList[5]} - {taxPaid:.2f} - {empNet:.2f}")
+            totalEmps += 1
+            totalHours += float(empList[3])
+            totalTaxesPaid += taxPaid
+            totalNet += empNet
+        if fileDate == empList[0]:
+            EmpDetailList.append([empList[0], empList[1], empList[2], float(empList[3]), float(empList[4]), float(empList[5])])
+            empGross = float(empList[3]) * float(empList[4])
+            taxPaid = empGross * (float(empList[5]) / 100)
+            empNet = empGross - taxPaid
+            print(f"{empList[0]} - {empList[1]} - {empList[2]} - {empList[3]} - {empList[4]} - {empGross:.2f} - {empList[5]} - {taxPaid:.2f} - {empNet:.2f}")
+            totalEmps += 1
+            totalHours += float(empList[3])
+            totalTaxesPaid += taxPaid
+            totalNet += empNet
+    
+    TotalsDict = {"Total Employess displayed: ": totalEmps, "Total hours worked by these employees: ": totalHours, "Total taxes paid by these employees: ": totalTaxesPaid, "Total net income paid to these employees: ": totalNet} 
+
+    print("\n|<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<|")
+    for key, value in TotalsDict.items():
+        print(key, value)
+    print("|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|\n")
+      
+def user_admin():
+    while True:
+        empName = get_name()
+        if empName.lower() == "end":
+            break
+        fromDate, toDate = get_worked_dates()
+        empHours = get_hours_worked()
+        empPay = get_hourly_rate()
+        taxRate = get_tax_rate()
+        print()
+        empDetails = [fromDate, toDate, empName, empHours, empPay, taxRate]
+        emp_save_file(empDetails)
+    print() 
+    display_all_info()    
+    
+def user_user():
+    display_all_info()
+   
+def main():
+    userList = read_user_file()
+    usersToAdd = get_new_users (userList)
+    user_save_file(usersToAdd)
+    print()
+    endingList = read_user_file()
+    display_user_info(endingList)
+    print()
+    userAccess = system_login(endingList)
+    if userAccess.lower() == "admin":
+        print()
+        user_admin()
+    elif userAccess.lower() == "user":
+        print()
+        user_user()
+    else:
+        print("\nInvalid user. Goodbye")
+        
+    
+
+if __name__ == "__main__":
+    main()
